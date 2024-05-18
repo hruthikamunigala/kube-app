@@ -1,4 +1,4 @@
-apiVersion: apps/latest
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vprodb
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: vprodb
-          image: sweety005/vprofiledb:latest
+          image: vprofile/vprofiledb
             #args:
             #- "--ignore-db-dir"
           #- "lost+found"
@@ -38,7 +38,7 @@ spec:
         - name: vpro-db-data
           # This AWS EBS volume must already exist.
           awsElasticBlockStore:
-            volumeID: vol-060d471c858807406
+            volumeID: MentiondVoumeID
             fsType: ext4
 
       initContainers:
@@ -48,4 +48,3 @@ spec:
           volumeMounts:
             - name: vpro-db-data
               mountPath: /var/lib/mysql
-
